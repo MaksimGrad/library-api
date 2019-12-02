@@ -16,9 +16,9 @@
 </head>
 <body>
 	<div class="container">
-		<a class="btn btn-primary" href='/book-list'>К списку книг</a>
+		<a class="btn btn-primary" href='/books/book-list'>К списку книг</a>
 		<h1>Редактирование книги</h1>
-		<form action="/edit-book" method="post">
+		<form action="/books/edit-book" method="post">
 			<input type="hidden" name="id" value="<%= book[0].id %>" />
 			<div class="form-group">
 				<label>Название книги</label><br>

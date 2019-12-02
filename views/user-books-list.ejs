@@ -34,7 +34,7 @@
 			Книги пользователя <%= user[0].surname %> <%= user[0].name %>
 		</h1>
 		<div class="user-book">
-			<form action="/add-user-book" method="post">
+			<form action="/user-books/add-user-book" method="post">
 				<input type="hidden" name="userId" value="<%= user[0].id %>">
 				<div class="form-group">
 					<input class="form-control" type="text" name="bookId" list="type-list" autocomplete="off" placeholder="Книга">
@@ -69,7 +69,7 @@
 				</td>
 				<td><%= userbooks[i].issue_date.toString('dd.MM.yyyy HH:mm:ss') %></td>
 				<% if(userbooks[i].return_date === null) { %>
-				<td><a href="/return-book/<%= userbooks[i].id %>" class="btn btn-light">Не возвращена</a></td>
+				<td><a href="/user-books/return-book/<%= userbooks[i].id %>" class="btn btn-light">Не возвращена</a></td>
 				<% } else { %>
 				<td><%= userbooks[i].return_date %></td>
 				<% } %>

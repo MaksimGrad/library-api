@@ -16,9 +16,9 @@
 </head>
 <body>
 	<div class="container">
-		<a class="btn btn-primary" href='/author-list'>К списку авторов</a>
+		<a class="btn btn-primary" href='/authors/author-list'>К списку авторов</a>
 		<h1>Редактирование автора</h1>
-		<form action="/edit-author" method="post">
+		<form action="/authors/edit-author" method="post">
 			<input type="hidden" name="id" value="<%= author[0].id %>" />
 			<div class="form-group">
 				<label>Фамилия автора</label><br>

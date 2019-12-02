@@ -16,9 +16,9 @@
 </head>
 <body>
 	<div class="container">
-		<a class="btn btn-primary" href='/user-list'>К списку пользователей</a>
+		<a class="btn btn-primary" href='/users/user-list'>К списку пользователей</a>
 		<h1>Редактирование пользователя</h1>
-		<form action="/edit-user" method="post">
+		<form action="/users/edit-user" method="post">
 			<input type="hidden" name="id" value="<%= user[0].id %>" />
 			<div class="form-group">
 				<label>Фамилия пользователя</label><br>
