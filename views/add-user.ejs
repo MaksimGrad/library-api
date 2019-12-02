@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Добавление пользователя</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+	<style type="text/css">
+		.container {
+			text-align: center;
+			margin-top: 30px;
+		}
+		form {
+			width: 25%;
+			margin: auto;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<a class="btn btn-primary" href='/user-list'>К списку пользователей</a>
+		<h1>Добавление пользователя</h1>
+		<form action="/add-user" method="post">
+			<div class="form-group">
+				<label>Фамилия пользователя</label><br>
+				<input class="form-control" type="text" name="surname" />
+			</div>
+			<div class="form-group">
+				<label>Имя пользователя</label><br>
+				<input class="form-control" type="text" name="name" />
+			</div>
+			<input class="btn btn-primary" type="submit" value="Добавить" />
+		</form>
+	</div>
+</body>
+</html>

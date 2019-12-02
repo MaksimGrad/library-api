@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Добавление автора</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+	<style type="text/css">
+		.container {
+			text-align: center;
+			margin-top: 30px;
+		}
+		form {
+			width: 25%;
+			margin: auto;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<a class="btn btn-primary" href='/author-list'>К списку авторов</a>
+		<h1>Добавление автора</h1>
+		<form action="/add-author" method="post">
+			<div class="form-group">
+				<label>Фамилия автора</label><br>
+				<input class="form-control" type="text" name="surname" />
+			</div>
+			<div class="form-group">
+				<label>Имя автора</label><br>
+				<input class="form-control" type="text" name="name" />
+			</div>
+			<input class="btn btn-primary" type="submit" value="Добавить" />
+		</form>
+	</div>
+</body>
+</html>

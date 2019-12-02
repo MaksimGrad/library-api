@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Читательская книга</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+	<style type="text/css">
+		.book-list {
+			width: 80%;
+			text-align: center;
+			margin: auto;
+			margin-top: 30px;
+		}
+		h1 {
+			margin: 30px 0;
+			text-align: center;
+		}
+		.add {
+			text-align: center;
+		}
+		.user-book {
+			width: 30%;
+			margin: auto;
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<a class="btn btn-primary" href='/'>На главную</a>
+		<h1>
+			Книги пользователя <%= user[0].surname %> <%= user[0].name %>
+		</h1>
+		<div class="user-book">
+			<form action="/add-user-book" method="post">
+				<input type="hidden" name="userId" value="<%= user[0].id %>">
+				<div class="form-group">
+					<input class="form-control" type="text" name="bookId" list="type-list" autocomplete="off" placeholder="Книга">
+					<datalist id="type-list">
+						<% for(let i = 0; i < books.length; i++) { %>
+						<option value="<%= books[i].id %>">
+							<%= books[i].authorName %> <%= books[i].authorSurname %> - <%= books[i].name %>
+						</option>
+						<% } %>
+					}
+				</datalist>
+			</div>
+			<input class="btn btn-primary" type="submit" value="Добавить" />
+		</form>
+	</div>
+	<table class="table table-dark book-list">
+		<thead>
+			<tr>
+				<th scope="col">Название книги</th>
+				<th scope="col">Автор</th>
+				<th scope="col">Дата выдачи</th>
+				<th scope="col">Дата возврата</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% for(let i = 0; i < userbooks.length; i++) { %>
+			<tr>
+				<td><%= userbooks[i].name %></td>
+				<td>
+					<%= userbooks[i].authorName %>
+					<%= userbooks[i].authorSurname %>
+				</td>
+				<td><%= userbooks[i].issue_date.toString('dd.MM.yyyy HH:mm:ss') %></td>
+				<% if(userbooks[i].return_date === null) { %>
+				<td><a href="/return-book/<%= userbooks[i].id %>" class="btn btn-light">Не возвращена</a></td>
+				<% } else { %>
+				<td><%= userbooks[i].return_date %></td>
+				<% } %>
+			</tr>
+			<% } %>
+		</tbody>
+	</table>
+</div>
+</body>
+</html>
