@@ -12,39 +12,34 @@ exports.toAddingAuthor = function (req, resp) {
 }
 
 exports.addAuthor = function (req, resp) {
-	var author = {
-		authorName: req.body.name,
-		authorSurname: req.body.surname
-	};
-	Author.create(author, function (err, result) {
+	var author = new Author(req.body.name, req.body.surname);
+	author.create(author, function (err, result) {
 		if(err) throw err;
 		resp.redirect('/authors/author-list');
 	})
 }
 
 exports.toEditingAuthor = function (req, resp) {
-	var id = req.params.id;
-	Author.findById(id, function (err, result) {
+	var author = new Author();
+	author.authorId = req.params.id;
+	author.findById(author.authorId, function (err, result) {
 		if(err) throw err;
 		resp.render('edit-author', { author: result });
 	})
 }
 
 exports.editAuthor = function (req, resp) {
-	var author = {
-		id: req.body.id,
-		authorName: req.body.name,
-		authorSurname: req.body.surname
-	};
-	Author.update(author.id, author, function (err, result) {
+	var author = new Author(req.body.name, req.body.surname, req.body.id);
+	author.update(author.authorId, author, function (err, result) {
 		if(err) throw err;
 		resp.redirect('/authors/author-list');
 	})
 }
 
 exports.deleteAuthor = function (req, resp) {
-	var id = req.params.id;
-	Author.delete(id, function (err, result) {
+	var author = new Author();
+	author.authorId = req.params.id;
+	author.delete(author.authorId, function (err, result) {
 		if(err) throw err;
 		resp.redirect('/authors/author-list');
 	})

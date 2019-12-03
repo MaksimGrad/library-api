@@ -12,39 +12,34 @@ exports.toAddingUser = function (req, resp) {
 }
 
 exports.addUser = function (req, resp) {
-	var user = {
-		name: req.body.name,
-		surname: req.body.surname
-	};
-	User.create(user, function (err, result) {
+	var user = new User(req.body.name, req.body.surname);
+	user.create(user, function (err, result) {
 		if(err) throw err;
 		resp.redirect('/users/user-list');
 	})
 }
 
 exports.toEditingUser = function (req, resp) {
-	var id = req.params.id;
-	User.findById(id, function (err, result) {
+	var user = new User();
+	user.userId = req.params.id;
+	user.findById(user.userId, function (err, result) {
 		if(err) throw err;
 		resp.render('edit-user', { user: result });
 	})
 }
 
 exports.editUser = function (req, resp) {
-	var user = {
-		id: req.body.id,
-		name: req.body.name,
-		surname: req.body.surname
-	};
-	User.update(user.id, user, function (err, result) {
+	var user = new User(req.body.name, req.body.surname, req.body.id);
+	user.update(user.userId, user, function (err, result) {
 		if(err) throw err;
 		resp.redirect('/users/user-list');
 	})
 }
 
 exports.deleteUser = function (req, resp) {
-	var id = req.params.id;
-	User.delete(id, function (err, result) {
+	var user = new User();
+	user.userId = req.params.id;
+	user.delete(user.userId, function (err, result) {
 		if(err) throw err;
 		resp.redirect('/users/user-list');
 	})

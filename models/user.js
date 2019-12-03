@@ -2,6 +2,20 @@ var db = require('../db');
 
 module.exports = class User {
 
+	constructor(name, surname, id = null) {
+		this.name = name;
+		this.surname = surname;
+		if (id !== null) this.id = id;
+	}
+
+	get userId() {
+		return this.id;
+	}
+
+	set userId(newId) {
+		this.id = newId;
+	}
+
 	static findAll(cb) {
 		let query = 
 		"SELECT * FROM users Order by surname";
@@ -10,27 +24,27 @@ module.exports = class User {
 		})
 	}
 
-	static findById(id, cb) {
+	findById(id, cb) {
 		let query = `SELECT * FROM users WHERE id = ${id}`;
 		db.get().query(query, function (err, result, fields) {
 			cb(err, result);
 		});
 	}
 
-	static create(user, cb) {
+	create(user, cb) {
 		db.get().query('INSERT INTO users SET ?', user, function(err, result) {
 			cb(err, result);
 		})
 	}
 
-	static update(id, user, cb) {
+	update(id, user, cb) {
 		let query = `UPDATE users SET ? WHERE id = ${id}`;
 		db.get().query(query, user, function(err, result) {
 			cb(err, result);
 		})
 	}
 
-	static delete(id, cb) {
+	delete(id, cb) {
 		let query = `DELETE FROM users WHERE id = ${id}`;
 		db.get().query(query, function(err, result) {
 			cb(err, result);

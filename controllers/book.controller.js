@@ -16,19 +16,18 @@ exports.toAddingBook = function (req, resp) {
 }
 
 exports.addBook = function (req, resp) {
-	var book = {
-		name: req.body.bookName,
-		authorId: req.body.authorId
-	};
-	Book.create(book, function (err, result) {
+
+	var book = new Book(req.body.bookName, req.body.authorId);
+	book.create(book, function (err, result) {
 		if(err) throw err;
 		resp.redirect('/books/book-list');
 	})
 }
 
 exports.toEditingBook = function (req, resp) {
-	var id = req.params.id;
-	Book.findById(id, function (err, book) {
+	var book = new Book();
+	book.bookId = req.params.id;
+	book.findById(book.bookId, function (err, book) {
 		if(err) throw err;
 		Author.findAll(function (err, authors) {
 			if(err) throw err;
@@ -38,20 +37,17 @@ exports.toEditingBook = function (req, resp) {
 }
 
 exports.editBook = function (req, resp) {
-	var book = {
-		id: req.body.id,
-		name: req.body.bookName,
-		authorId: req.body.authorId
-	};
-	Book.update(book.id, book, function (err, result) {
+	var book = new Book(req.body.bookName, req.body.authorId, req.body.id);
+	book.update(book.bookId, book, function (err, result) {
 		if(err) throw err;
 		resp.redirect('/books/book-list');
 	})
 }
 
 exports.deleteBook = function (req, resp) {
-	var id = req.params.id;
-	Book.delete(id, function (err, result) {
+	var book = new Book();
+	book.bookId = req.params.id;
+	book.delete(book.bookId, function (err, result) {
 		if(err) throw err;
 		resp.redirect('/books/book-list');
 	})

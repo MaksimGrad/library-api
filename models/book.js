@@ -2,6 +2,20 @@ var db = require('../db');
 
 module.exports = class Book {
 
+	constructor(name, authorId, id = null) {
+		this.name = name;
+		this.authorId = authorId;
+		if (id !== null) this.id = id;
+	}
+
+	get bookId() {
+		return this.id;
+	}
+
+	set bookId(newId) {
+		this.id = newId;
+	}
+
 	static findAll(cb) {
 		let query = 
 		`SELECT b.*, a.authorSurname, a.authorName 
@@ -12,27 +26,27 @@ module.exports = class Book {
 		})
 	}
 
-	static findById(id, cb) {
+	findById(id, cb) {
 		let query = `SELECT * FROM books WHERE id = ${id}`;
 		db.get().query(query, function (err, result, fields) {
 			cb(err, result);
 		});
 	}
 
-	static create(book, cb) {
+	create(book, cb) {
 		db.get().query('INSERT INTO books SET ?', book, function(err, result) {
 			cb(err, result);
 		})
 	}
 
-	static update(id, book, cb) {
+	update(id, book, cb) {
 		let query = `UPDATE books SET ? WHERE id = ${id}`;
 		db.get().query(query, book, function(err, result) {
 			cb(err, result);
 		})
 	}
 
-	static delete(id, cb) {
+	delete(id, cb) {
 		let query = `DELETE FROM books WHERE id = ${id}`;
 		db.get().query(query, function(err, result) {
 			cb(err, result);
